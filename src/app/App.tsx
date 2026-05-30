@@ -1,6 +1,53 @@
 export default function App() {
+  const handleDownload = () => {
+    window.print();
+  };
+
   return (
     <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center p-8">
+      {/* Download Button */}
+      <button
+        onClick={handleDownload}
+        className="no-print"
+        style={{
+          position: 'fixed',
+          bottom: '32px',
+          right: '32px',
+          backgroundColor: '#2563EB',
+          color: '#FFFFFF',
+          border: 'none',
+          borderRadius: '12px',
+          padding: '14px 28px',
+          fontSize: '14px',
+          fontWeight: '600',
+          fontFamily: 'Inter, sans-serif',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          boxShadow: '0 4px 14px rgba(37, 99, 235, 0.4)',
+          transition: 'all 0.2s ease',
+          zIndex: 1000,
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = '#1D4ED8';
+          e.currentTarget.style.boxShadow = '0 6px 20px rgba(37, 99, 235, 0.5)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = '#2563EB';
+          e.currentTarget.style.boxShadow = '0 4px 14px rgba(37, 99, 235, 0.4)';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Baixar CV
+      </button>
+
       {/* A4 Resume Container */}
       <div
         className="bg-white shadow-lg"
@@ -31,7 +78,7 @@ export default function App() {
               fontWeight: '400'
             }}
           >
-            Desenvolvedor de Software Júnior | Web Developer
+            Técnico Informático | Desenvolvimento de Software | TI & Redes
           </p>
           <div
             className="flex flex-wrap gap-x-3 gap-y-1"
@@ -44,7 +91,7 @@ export default function App() {
             <span>|</span>
             <span>(+244) 946-554-601</span>
             <span>|</span>
-            <span>orlandojosecorreia1@gmail.com</span>
+            <span>orlandojosecorreia1@outlook.com</span>
             <span>|</span>
             <span>linkedin.com/in/orlandojoseorreia</span>
             <span>|</span>
@@ -115,7 +162,7 @@ export default function App() {
             />
             <SkillCategory
               label="Ferramentas"
-              skills={["Microsoft Office (Avançado)", "Git (básico)"]}
+              skills={["Microsoft Office (Avançado)", "Git (Intermediário)"]}
             />
             <SkillCategory
               label="Marketing Digital"

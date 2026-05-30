@@ -1,3 +1,32 @@
 @import './fonts.css';
 @import './tailwind.css';
 @import './theme.css';
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 8mm 0;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Remove background and shadow from wrapper, keep CV clean */
+  .min-h-screen {
+    background: none !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  .shadow-lg {
+    box-shadow: none !important;
+  }
+}
