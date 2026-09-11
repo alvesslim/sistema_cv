@@ -3,30 +3,69 @@
 @import './theme.css';
 
 @media print {
-  .no-print {
+  .no-print,
+  .no-print *,
+  header,
+  main,
+  nav,
+  button {
     display: none !important;
   }
 
   @page {
-    size: A4;
-    margin: 8mm 0;
+    size: A4 portrait;
+    margin: 0 !important;
   }
 
+  html,
   body {
-    margin: 0;
-    padding: 0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Remove background and shadow from wrapper, keep CV clean */
-  .min-h-screen {
-    background: none !important;
+    width: 210mm !important;
+    margin: 0 !important;
     padding: 0 !important;
-    min-height: auto !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .shadow-lg {
+  #root {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+  }
+
+  #cv-print-root {
+    display: block !important;
+    width: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+  }
+
+  .cv-sheet {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 13mm 18mm !important;
+    padding: 16mm 20mm !important;
+    margin: 0 !important;
     box-shadow: none !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  .cv-sheet:last-of-type {
+    page-break-after: auto !important;
+    break-after: auto !important;
   }
 }
