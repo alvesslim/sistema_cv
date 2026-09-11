@@ -26,21 +26,13 @@ export const CVDocument: React.FC<CVDocumentProps> = ({ data }) => {
   const font = "Calibri, Carlito, Candara, 'Segoe UI', Arial, sans-serif";
 
   const pageStyle: React.CSSProperties = {
-    width: "210mm",
-    minHeight: "297mm",
-    padding: "16mm 20mm",
     fontFamily: font,
-    boxSizing: "border-box",
   };
 
   return (
     <div className="flex flex-col items-center gap-8 w-full print:gap-0 print:m-0">
-      {/* PAGE 1 */}
-      <div id="pagina-1" className="cv-sheet bg-white text-slate-900 shadow-xl relative" style={pageStyle}>
-        <div className="no-print absolute top-3 right-5 text-[10px] uppercase tracking-wider font-bold text-slate-400">
-          Página 1 de 2
-        </div>
-        <header className="mb-4">
+      <div id="cv-content" className="cv-sheet bg-white text-slate-900 shadow-xl relative" style={pageStyle}>
+        <div className="mb-4">
           <h1
             className="font-bold text-[#1A1A1A] tracking-tight mb-1 uppercase"
             style={{ fontSize: "26pt", lineHeight: "1.15", fontFamily: "Calibri, Carlito, Candara, sans-serif" }}
@@ -59,8 +51,7 @@ export const CVDocument: React.FC<CVDocumentProps> = ({ data }) => {
             {personalInfo.phone && personalInfo.email && <span className="text-slate-300">•</span>}
             {personalInfo.email && <span>{personalInfo.email}</span>}
           </div>
-          <div style={{ width: "100%", height: "1.5pt", backgroundColor: "#1E3A5F", marginTop: "10px" }} />
-        </header>
+        </div>
 
         {profile && (
           <section className="mb-4">
@@ -154,13 +145,6 @@ export const CVDocument: React.FC<CVDocumentProps> = ({ data }) => {
             </div>
           </section>
         )}
-      </div>
-
-      {/* PAGE 2 */}
-      <div id="pagina-2" className="cv-sheet bg-white text-slate-900 shadow-xl relative" style={pageStyle}>
-        <div className="no-print absolute top-3 right-5 text-[10px] uppercase tracking-wider font-bold text-slate-400">
-          Página 2 de 2
-        </div>
 
         {courses.length > 0 && (
           <section className="mb-5">
@@ -228,7 +212,7 @@ function SectionHeader({ title }: { title: string }) {
 
 function SkillRow({ category, skills }: { category: string; skills: string[] }) {
   return (
-    <div className="flex flex-wrap sm:flex-nowrap gap-x-2 gap-y-1 items-baseline">
+    <div className="flex gap-x-2 gap-y-1 items-baseline">
       <span
         className="uppercase shrink-0 font-bold text-[#4B5563]"
         style={{ fontSize: "8pt", minWidth: "155px", letterSpacing: "0.2px" }}

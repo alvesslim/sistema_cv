@@ -22,6 +22,8 @@ import {
   Sparkles,
   X,
   FileUp,
+  Copy,
+  CheckCircle2,
 } from "lucide-react";
 import { CVImportModal } from "./CVImportModal";
 
@@ -337,6 +339,27 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange }) => {
     });
   };
 
+  const [isPromptCopied, setIsPromptCopied] = useState(false);
+
+  const handleCopyPrompt = () => {
+    const promptText = `Quero que me ajudes a criar o meu currículo. Actua como um especialista em Recursos Humanos. Vou fornecer-te as minhas informações, e tu deves escrevê-las e organizá-las exactamente com a seguinte estrutura de tópicos, para que eu as possa importar directamente para a minha plataforma de currículos ATS:
+
+1. IDENTIFICAÇÃO: (Nome Completo, Cargo, Telefone, Email, Localização)
+2. PERFIL PROFISSIONAL: (Resumo de impacto, cerca de 3 a 5 linhas)
+3. COMPETÊNCIAS TÉCNICAS: (Agrupadas por categoria, ex: Linguagens, Ferramentas, Sistemas)
+4. COMPETÊNCIAS COMPORTAMENTAIS: (Ex: Liderança, Comunicação, Resolução de Problemas)
+5. EXPERIÊNCIAS PROFISSIONAIS: (Para cada uma indicar: Empresa, Cargo, Período, Localização, e Descrição estruturada em tópicos de responsabilidades e conquistas)
+6. FORMAÇÕES ACADÉMICAS: (Instituição, Curso, Ano, Localização)
+7. MÉRITOS E IDIOMAS: (Prémios, Cursos extra, Certificações, Níveis de Idioma)
+
+Pergunta-me agora pela minha experiência profissional e dados para começarmos.`;
+
+    navigator.clipboard.writeText(promptText).then(() => {
+      setIsPromptCopied(true);
+      setTimeout(() => setIsPromptCopied(false), 2500);
+    });
+  };
+
   return (
     <div className="bg-white rounded-2xl border border-slate-200/80 shadow-md flex flex-col h-full overflow-hidden">
       {/* Top action toolbar for editor */}
@@ -365,6 +388,23 @@ export const CVEditor: React.FC<CVEditorProps> = ({ data, onChange }) => {
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-600" />
             <span>✨ Preencher com Exemplo</span>
+          </button>
+
+          <button
+            onClick={handleCopyPrompt}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg border shadow-sm transition cursor-pointer ${
+              isPromptCopied 
+                ? "bg-emerald-50 border-emerald-300 text-emerald-800" 
+                : "bg-indigo-50 border-indigo-300 hover:bg-indigo-100 text-indigo-900"
+            }`}
+            title="Copiar estrutura para o ChatGPT preencher o currículo por si"
+          >
+            {isPromptCopied ? (
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+            ) : (
+              <Copy className="w-3.5 h-3.5 text-indigo-600" />
+            )}
+            <span>{isPromptCopied ? "Prompt Copiado!" : "Copiar Prompt para IA"}</span>
           </button>
 
           <button

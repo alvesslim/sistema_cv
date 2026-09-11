@@ -36,6 +36,7 @@ export const AdminModal: React.FC<AdminModalProps> = ({ onClose }) => {
   const [phoneVal, setPhoneVal] = useState(config.whatsappNumber);
   const [priceVal, setPriceVal] = useState(config.price);
   const [adminPassVal, setAdminPassVal] = useState(config.adminPassword);
+  const [masterKeyVal, setMasterKeyVal] = useState(config.masterKeyEnabled || false);
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
@@ -71,9 +72,11 @@ export const AdminModal: React.FC<AdminModalProps> = ({ onClose }) => {
   const handleSaveSettings = (e: React.FormEvent) => {
     e.preventDefault();
     const updated = saveSystemConfig({
+      ...config,
       whatsappNumber: phoneVal.trim(),
       price: priceVal.trim(),
       adminPassword: adminPassVal.trim(),
+      masterKeyEnabled: masterKeyVal,
     });
     setConfig(updated);
     setSaveSuccess(true);
@@ -288,6 +291,19 @@ export const AdminModal: React.FC<AdminModalProps> = ({ onClose }) => {
                     placeholder="orlando2026"
                     className="w-full px-3 py-1.5 text-xs border border-slate-300 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-slate-900 font-mono"
                   />
+                </div>
+
+                <div className="flex items-center gap-2 mt-2 bg-slate-50 p-2 rounded-lg border border-slate-200">
+                  <input
+                    type="checkbox"
+                    id="masterKeyToggle"
+                    checked={masterKeyVal}
+                    onChange={(e) => setMasterKeyVal(e.target.checked)}
+                    className="w-3.5 h-3.5 text-slate-900 rounded border-slate-300 focus:ring-slate-900"
+                  />
+                  <label htmlFor="masterKeyToggle" className="text-[11px] font-semibold text-slate-700 cursor-pointer">
+                    Activar botão da "Chave Mestra" (Testes)
+                  </label>
                 </div>
               </div>
 

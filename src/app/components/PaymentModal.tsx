@@ -217,23 +217,24 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
               </button>
 
               {/* Master Test Key shortcut for Orlando */}
-              <div className="pt-1.5 flex items-center justify-between text-[11px]">
-                <span className="text-slate-400">É o Orlando a testar?</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setCode("ORLANDO-VIP-2026");
-                    setErrorMsg("");
-                    setTimeout(() => {
-                      onSuccess();
-                    }, 250);
-                  }}
-                  className="font-semibold text-blue-700 hover:text-blue-900 underline cursor-pointer"
-                  title="Desbloquear imediatamente usando a Chave Mestra de Testes"
-                >
-                  Usar Chave Mestra (ORLANDO-VIP-2026)
-                </button>
-              </div>
+              {getSystemConfig().masterKeyEnabled && (
+                <div className="pt-1.5 flex items-center justify-between text-[11px]">
+                  <span className="text-slate-400">É o Orlando a testar?</span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCode("ORLANDO-VIP-2026");
+                      setErrorMsg("");
+                      setTimeout(() => {
+                        onSuccess();
+                      }, 250);
+                    }}
+                    className="text-[#1E3A5F] font-bold hover:underline transition cursor-pointer"
+                  >
+                    Usar Chave Mestra
+                  </button>
+                </div>
+              )}
             </div>
           </form>
 

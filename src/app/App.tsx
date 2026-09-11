@@ -5,6 +5,7 @@ import { CVDocument } from "./components/CVDocument";
 import { PaymentModal } from "./components/PaymentModal";
 import { AdminModal } from "./components/AdminModal";
 import { OrderRecoveryModal } from "./components/OrderRecoveryModal";
+import { LandingPage } from "./components/LandingPage";
 import { generateRandomOrderId, saveOrderCV } from "./utils/security";
 import {
   Download,
@@ -20,6 +21,21 @@ import {
 } from "lucide-react";
 
 export default function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const navigate = (path: string) => {
+    window.history.pushState({}, "", path);
+    setCurrentPath(path);
+  };
+
   const [cvData, setCVData] = useState<CVData>(() => {
     const saved = localStorage.getItem("cv_system_data");
     if (saved) {
@@ -64,32 +80,7 @@ export default function App() {
     return sessionStorage.getItem("cv_unlocked_session") === "true";
   });
 
-  // Route detection for hidden /admin
-  const checkAdminRoute = useCallback(() => {
-    if (typeof window === "undefined") return false;
-    const path = window.location.pathname.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
-    return (
-      path === "/admin" ||
-      path === "/admin/" ||
-      hash === "#/admin" ||
-      hash === "#admin"
-    );
-  }, []);
-
-  const [isAdminRoute, setIsAdminRoute] = useState<boolean>(() => checkAdminRoute());
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setIsAdminRoute(checkAdminRoute());
-    };
-    window.addEventListener("popstate", handleRouteChange);
-    window.addEventListener("hashchange", handleRouteChange);
-    return () => {
-      window.removeEventListener("popstate", handleRouteChange);
-      window.removeEventListener("hashchange", handleRouteChange);
-    };
-  }, [checkAdminRoute]);
+  const isAdminRoute = currentPath.toLowerCase() === "/admin" || currentPath.toLowerCase() === "/admin/";
 
   // Modals state
   const [showPaymentModal, setShowPaymentModal] = useState<boolean>(false);
@@ -104,13 +95,6 @@ export default function App() {
       document.title = `Meu CV - ${cvData.personalInfo.fullName}`;
     }
   }, [cvData, orderId]);
-
-  // Clean URL hash if not on admin route
-  useEffect(() => {
-    if (window.location.hash && !window.location.hash.includes("admin")) {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-  }, []);
 
   const handleDownloadClick = () => {
     if (!isUnlocked) {
@@ -139,9 +123,6 @@ export default function App() {
   };
 
   const handlePrint = () => {
-    if (window.location.hash && !window.location.hash.includes("admin")) {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
     setShowPrintModal(false);
     
     // Call print directly to avoid popup blockers or Safari print restrictions
@@ -150,6 +131,10 @@ export default function App() {
       window.print();
     }, 50);
   };
+
+  if (currentPath === "/" || currentPath === "") {
+    return <LandingPage onStart={() => navigate("/editor")} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#EAECEF] flex flex-col selection:bg-slate-200">
@@ -394,14 +379,13 @@ export default function App() {
       )}
 
       {/* ================= ADMIN MODAL (HIDDEN ROUTE /admin ONLY) ================= */}
-      {isAdminRoute && (
-        <AdminModal
-          onClose={() => {
-            setIsAdminRoute(false);
-            window.history.pushState(null, "", "/");
-          }}
-        />
-      )}
+        {isAdminRoute && (
+          <AdminModal
+            onClose={() => {
+              navigate("/");
+            }}
+          />
+        )}
 
       {/* ================= PRINT INSTRUCTIONS MODAL ================= */}
       {showPrintModal && (

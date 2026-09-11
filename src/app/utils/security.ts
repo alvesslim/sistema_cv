@@ -9,6 +9,7 @@ export interface SystemConfig {
   displayPhone: string;
   price: string;
   adminPassword: string;
+  masterKeyEnabled: boolean;
 }
 
 export const DEFAULT_CONFIG: SystemConfig = {
@@ -16,6 +17,7 @@ export const DEFAULT_CONFIG: SystemConfig = {
   displayPhone: "+244 946 554 601",
   price: "5.000 Kz",
   adminPassword: "orlando2026",
+  masterKeyEnabled: false,
 };
 
 const CONFIG_STORAGE_KEY = "cv_system_config";
