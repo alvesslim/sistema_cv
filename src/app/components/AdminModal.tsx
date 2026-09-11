@@ -349,6 +349,30 @@ export const AdminModal: React.FC<AdminModalProps> = ({ onClose }) => {
                 >
                   Liberar Download Agora
                 </button>
+                  <div className="flex flex-col gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sessionStorage.setItem("cv_unlocked_session", "true");
+                        alert("✅ Download liberado para testes!");
+                      }}
+                      className="px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer"
+                      title="Libera o download imediatamente neste navegador"
+                    >
+                      Desbloquear Download Agora
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        sessionStorage.removeItem("cv_unlocked_session");
+                        alert("🔒 Downloads bloqueados!\nO próximo clique exigirá a Chave Mestra ou o código.");
+                      }}
+                      className="px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 font-bold text-xs rounded-xl shadow-sm transition cursor-pointer"
+                      title="Bloqueia o download novamente neste navegador"
+                    >
+                      Bloquear para Testar Pagamento
+                    </button>
+                  </div>
               </div>
               <p className="text-[11px] text-blue-700 leading-relaxed">
                 Você pode digitar <strong>ORLANDO-VIP-2026</strong> na janela de pagamento ou clicar no botão acima para liberar downloads ilimitados de teste neste navegador.
