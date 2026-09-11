@@ -40,10 +40,15 @@ export default function App() {
     return sampleCVData;
   });
 
-  const [zoom, setZoom] = useState<number>(85);
-  const [viewMode, setViewMode] = useState<"split" | "editor" | "preview">(
-    "split"
-  );
+  const [zoom, setZoom] = useState<number>(() => {
+    if (window.innerWidth < 640) return 40; // Scale down A4 for phones
+    if (window.innerWidth < 1024) return 60; // Scale down for tablets
+    return 85; // Default desktop zoom
+  });
+  const [viewMode, setViewMode] = useState<"split" | "editor" | "preview">(() => {
+    // Return 'editor' for mobile/tablets, 'split' for large desktop screens
+    return window.innerWidth < 1024 ? "editor" : "split";
+  });
 
   // Unique order ID for this session/customer
   const [orderId] = useState<string>(() => {
