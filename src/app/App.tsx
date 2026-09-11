@@ -16,6 +16,7 @@ import {
   Lock,
   ShieldCheck,
   KeyRound,
+  Printer,
 } from "lucide-react";
 
 export default function App() {
