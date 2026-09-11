@@ -26,6 +26,7 @@
   @page {
     size: A4 portrait;
     margin: 16mm 20mm;
+    margin: 0;
   }
 
   html,
@@ -68,6 +69,7 @@
     height: auto !important;
     max-height: none !important;
     padding: 0 !important;
+    padding: 0 20mm !important; /* Horizontal padding only, vertical handled by table spacer */
     margin: 0 !important;
     box-shadow: none !important;
     border: none !important;

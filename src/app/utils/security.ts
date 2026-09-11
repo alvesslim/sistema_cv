@@ -184,11 +184,13 @@ export function validateUnlockCode(
   }
 
   // Master bypass code for testing/admin
+  const config = getSystemConfig();
   if (
-    cleanCode === MASTER_UNLOCK_CODE ||
-    cleanCode === "ORLANDO-VIP-2026" ||
-    cleanCode === "ORLANDOVIP2026" ||
-    cleanCode === "ORLANDO2026"
+    config.masterKeyEnabled &&
+    (cleanCode === MASTER_UNLOCK_CODE ||
+      cleanCode === "ORLANDO-VIP-2026" ||
+      cleanCode === "ORLANDOVIP2026" ||
+      cleanCode === "ORLANDO2026")
   ) {
     return { success: true, message: "Chave Mestra aceita! Download liberado para administrador." };
   }
