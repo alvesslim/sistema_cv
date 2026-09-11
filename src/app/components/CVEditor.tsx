@@ -361,7 +361,7 @@ Pergunta-me agora pela minha experiência profissional e dados para começarmos.
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-md flex flex-col h-full overflow-hidden">
+    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-md flex flex-col lg:h-full lg:overflow-hidden">
       {/* Top action toolbar for editor */}
       <div className="px-5 py-3.5 bg-slate-50/80 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
@@ -409,12 +409,39 @@ Pergunta-me agora pela minha experiência profissional e dados para começarmos.
 
           <button
             onClick={() => {
-              if (
-                confirm(
-                  "Tem certeza que deseja limpar todos os campos e criar um Novo Currículo em Branco?"
-                )
-              ) {
-                onChange(emptyCVData);
+              if (confirm("Tens a certeza que queres limpar todo o currículo?")) {
+                onChange({
+                  personalInfo: { fullName: "", title: "", email: "", phone: "", location: "" },
+                  profile: "",
+                  technicalSkills: [{ id: "ts-1", category: "Categoria (Ex: Informática)", skills: ["Habilidade 1", "Habilidade 2"] }],
+                  behavioralSkills: ["Ex: Liderança", "Ex: Trabalho em equipa"],
+                  experiences: [{
+                    id: "exp-1",
+                    role: "Ex: Assistente Administrativo",
+                    company: "Ex: Nome da Empresa",
+                    location: "Ex: Luanda, Angola",
+                    period: "Ex: 2023 - Presente",
+                    bullets: ["Descreva aqui as suas principais funções e responsabilidades.", "Mencione resultados ou conquistas importantes."]
+                  }],
+                  education: [{
+                    id: "edu-1",
+                    degree: "Ex: Licenciatura em Gestão",
+                    institution: "Ex: Universidade Agostinho Neto",
+                    location: "Ex: Luanda",
+                    year: "Ex: 2024"
+                  }],
+                  courses: [{
+                    id: "c-1",
+                    title: "Ex: Curso de Secretariado",
+                    issuerLocation: "Ex: Centro de Formação Profissional | 2025"
+                  }],
+                  recognitions: [],
+                  languages: [{
+                    id: "l-1",
+                    language: "Ex: Inglês",
+                    level: "Ex: Intermédio"
+                  }]
+                });
               }
             }}
             className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 shadow-sm transition cursor-pointer"
@@ -461,7 +488,7 @@ Pergunta-me agora pela minha experiência profissional e dados para começarmos.
       </div>
 
       {/* Tab Contents */}
-      <div className="p-5 overflow-y-auto flex-1 space-y-5">
+      <div className="p-5 lg:overflow-y-auto flex-1 space-y-5">
         {/* ================= TAB: PERSONAL & PROFILE ================= */}
         {activeTab === "personal" && (
           <div className="space-y-4">

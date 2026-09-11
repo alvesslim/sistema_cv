@@ -275,7 +275,7 @@ export default function App() {
       {/* ================= MAIN WORKSPACE ================= */}
       <main className="no-print flex-1 max-w-[1600px] w-full mx-auto p-4 lg:p-6">
         <div
-          className={`h-[calc(100vh-100px)] ${
+          className={`min-h-[calc(100vh-100px)] lg:h-[calc(100vh-100px)] ${
             viewMode === "split"
               ? "grid grid-cols-1 lg:grid-cols-12 gap-6"
               : "block max-w-4xl mx-auto"
@@ -284,7 +284,7 @@ export default function App() {
           {/* LEFT: FORM EDITOR */}
           {(viewMode === "split" || viewMode === "editor") && (
             <div
-              className={`h-full ${
+              className={`lg:h-full ${
                 viewMode === "split" ? "lg:col-span-6 xl:col-span-5" : "w-full"
               }`}
             >
@@ -326,11 +326,11 @@ export default function App() {
               </div>
 
               {/* Scaled A4 sheets */}
-              <div className="w-full overflow-x-auto flex justify-start sm:justify-center pb-8">
+              <div className="w-full flex justify-center pb-8 overflow-hidden">
                 <div
-                  className="transition-transform origin-top"
+                  className="transition-all origin-top"
                   style={{
-                    transform: zoom !== 100 ? `scale(${zoom / 100})` : undefined,
+                    zoom: zoom / 100,
                     minWidth: "210mm",
                   }}
                 >
