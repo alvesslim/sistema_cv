@@ -14,32 +14,38 @@
 
   @page {
     size: A4 portrait;
-    margin: 0 !important;
+    margin: 0;
   }
 
   html,
   body {
-    width: 210mm !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    overflow: visible !important;
   }
 
   #root {
     margin: 0 !important;
     padding: 0 !important;
-    width: 210mm !important;
+    width: 100% !important;
     height: auto !important;
+    min-height: 100% !important;
     overflow: visible !important;
     background: #ffffff !important;
+    display: block !important;
   }
 
   #cv-print-root {
     display: block !important;
-    width: 210mm !important;
-    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important;
     padding: 0 !important;
     background: #ffffff !important;
     overflow: visible !important;
@@ -50,14 +56,13 @@
     min-height: 297mm !important;
     height: auto !important;
     max-height: none !important;
-    padding: 13mm 18mm !important;
     padding: 16mm 20mm !important;
-    margin: 0 !important;
+    margin: 0 auto !important;
     box-shadow: none !important;
     border: none !important;
     box-sizing: border-box !important;
     background: #ffffff !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     page-break-inside: avoid !important;
     break-inside: avoid !important;
     page-break-after: always !important;
@@ -69,3 +74,4 @@
     break-after: auto !important;
   }
 }
+

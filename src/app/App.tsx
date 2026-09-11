@@ -137,10 +137,12 @@ export default function App() {
       window.history.replaceState(null, "", window.location.pathname);
     }
     setShowPrintModal(false);
-    setViewMode("preview");
+    
+    // Call print directly to avoid popup blockers or Safari print restrictions
+    // We do not need to change viewMode because #cv-print-root is always in DOM
     setTimeout(() => {
       window.print();
-    }, 250);
+    }, 50);
   };
 
   return (
