@@ -326,39 +326,21 @@ export default function App() {
               </div>
 
               {/* Scaled A4 sheets */}
-              <div
-                className="w-full flex flex-col items-center transition-transform origin-top"
-                style={{
-                  transform: zoom !== 100 ? `scale(${zoom / 100})` : undefined,
-                }}
-              >
-                <CVDocument data={cvData} />
+              <div className="w-full overflow-x-auto flex justify-start sm:justify-center pb-8">
+                <div
+                  className="transition-transform origin-top"
+                  style={{
+                    transform: zoom !== 100 ? `scale(${zoom / 100})` : undefined,
+                    minWidth: "210mm",
+                  }}
+                >
+                  <CVDocument data={cvData} />
+                </div>
               </div>
             </div>
           )}
         </div>
       </main>
-
-      {/* Floating Action Button on mobile / bottom */}
-      <button
-        onClick={handleDownloadClick}
-        className={`no-print fixed bottom-6 right-6 z-40 text-white font-semibold text-xs sm:text-sm px-4 py-3 rounded-full shadow-2xl flex items-center gap-2.5 transition-all border border-white/20 cursor-pointer lg:hidden ${
-          isUnlocked ? "bg-emerald-700" : "bg-[#1E3A5F]"
-        }`}
-        title="Baixar em PDF"
-      >
-        {isUnlocked ? (
-          <>
-            <Download className="w-4 h-4" />
-            <span>Baixar PDF</span>
-          </>
-        ) : (
-          <>
-            <Lock className="w-4 h-4 text-amber-300" />
-            <span>Pagar & Baixar</span>
-          </>
-        )}
-      </button>
 
       {/* ================= PAYMENT MODAL (WHATSAPP GATEWAY) ================= */}
       {showPaymentModal && (

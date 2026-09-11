@@ -337,18 +337,6 @@ export const AdminModal: React.FC<AdminModalProps> = ({ onClose }) => {
                     ORLANDO-VIP-2026
                   </span>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    sessionStorage.setItem("cv_unlocked_session", "true");
-                    onClose();
-                    window.location.reload();
-                  }}
-                  className="px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white font-bold text-xs rounded-xl shadow-sm transition cursor-pointer"
-                  title="Libera o download imediatamente neste navegador sem precisar digitar código"
-                >
-                  Liberar Download Agora
-                </button>
                   <div className="flex flex-col gap-1.5">
                     <button
                       type="button"
